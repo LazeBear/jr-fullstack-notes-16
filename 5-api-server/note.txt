@@ -1,0 +1,31 @@
+-- package.json
+-- package-lock.json
+-- src
+  |-- index.js 入口文件 (server.js, app.js)
+  |-- routes
+      |-- tasks.js (taskRouter) (task.route.js)
+      |-- users.js (userRouter)
+      |-- index.js (把上面所有的router导入进来，再做一个统一的导出)
+  |-- controllers （逻辑处理部分）
+      |-- tasks.js (taskController) (task.controller.js)
+      |-- users.js
+  |-- models
+      |-- task.js (Task.js) 数据库中Task这个数据的格式设计 - ORM （object relational mapping), 跟数据库交互
+  |-- middleware
+      |-- error-middleware
+          |-- xxxErrorHandler.js
+      |-- authGuard
+      |-- cors
+  |-- utils (Helper function， shared function，db)
+  |-- db
+  |-- config 项目配置（环境变量的处理）
+
+
+routes 和 controllers 合并
+services 
+
+src
+- users
+  -- user.controller.js
+  -- user.model.js
+- tasks
