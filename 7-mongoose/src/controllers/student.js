@@ -47,8 +47,14 @@ async function addStudent(req, res) {
   const { firstName, lastName, email } = req.body;
   // data validation
   const student = new Student({ firstName, lastName, email });
+  // try {
+
   await student.save();
   return res.status(201).json(student);
+  // } catch (e) {
+  // next(e);
+  // return res.status(400).json(e);
+  // }
 }
 
 async function updateStudentById(req, res) {
@@ -61,6 +67,7 @@ async function updateStudentById(req, res) {
     { new: true }
   ).exec();
   if (!student) {
+    // return next(new DocumentNotFound('student', '_id'));
     return res.status(404).json({ error: 'student not found' });
   }
   return res.json(student);
@@ -106,6 +113,7 @@ async function removeStudentFromCourse(req, res) {
   if (!student || !course) {
     return res.status(404).json({ error: 'student or course not found' });
   }
+  // student.courses.includes(code)
   student = await Student.findByIdAndUpdate(
     id,
     { $pull: { courses: code } },

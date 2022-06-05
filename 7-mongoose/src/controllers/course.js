@@ -1,8 +1,23 @@
 const Course = require('../models/course');
+const Joi = require('joi');
 
 async function getAllCourses(req, res) {
+  // try {
   const courses = await Course.find().exec();
   return res.json(courses);
+  // } catch (e) {
+
+  //
+  // }
+
+  // Course.find().exec().then((res)=>{}).catch((err)=>{})
+
+  // Course.find((error, result) => {
+  //   if (error) {
+  //     return ....
+  //   }
+  //   // result handling
+  // })
 }
 
 async function getCourseById(req, res) {
@@ -17,7 +32,20 @@ async function getCourseById(req, res) {
 }
 
 async function addCourse(req, res) {
-  const { code, name, description } = req.body;
+  // const { code, name, description } = req.body;
+  const schema = Joi.object({
+    name: Joi.string().min(2).max(10).required(),
+    // COMP1001 SCI2002
+    code: Joi.string()
+      .regex(/^[a-zA-Z]+[0-9]+$/)
+      .required(),
+    description: Joi.string(),
+  });
+  const { code, name, description } = await schema.validateAsync(req.body, {
+    allowUnknown: true,
+    stripUnknown: true,
+  });
+
   const existingCourse = await Course.findById(code).exec();
   if (existingCourse) {
     return res.status(409).json({ error: 'duplicate course code' });

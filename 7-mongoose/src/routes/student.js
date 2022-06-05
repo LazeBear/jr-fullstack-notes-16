@@ -11,6 +11,19 @@ const {
 
 const studentRouter = express.Router();
 
+// curring function
+// high order function
+// function tryCatch(routeHandler) {
+//   return async (req, res, next) => {
+//     try {
+//       await routeHandler(req, res, next);
+//     } catch (e) {
+//       // res.json(e);
+//       next(e);
+//     }
+//   };
+// }
+
 studentRouter.get('', getAllStudents);
 studentRouter.get('/:id', getStudentById);
 studentRouter.put('/:id', updateStudentById);
