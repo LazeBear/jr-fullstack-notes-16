@@ -10,6 +10,9 @@ const schema = new Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: String,
+  },
 });
 
 schema.methods.hashPassword = async function () {

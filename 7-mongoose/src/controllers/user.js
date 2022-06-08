@@ -28,7 +28,7 @@ async function login(req, res) {
   if (!isPasswordValid) {
     return res.status(401).json({ error: 'invalid username or password' });
   }
-  const token = await generateToken({ username });
+  const token = await generateToken({ username, role: existingUser.role });
   return res.json({ token });
 }
 
